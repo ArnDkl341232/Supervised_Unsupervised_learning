@@ -27,13 +27,22 @@ def main():
     df = pd.DataFrame(data)
 
     # Поділ даних.
-
+    X = df[["Training Hours"]]
+    Y = df["Game Points"]
 
     # Модель.
-
+    model = LinearRegression()
+    model.fit(X, Y)
+    Y_pred = model.predict(X)
 
     # Візуалізація.
-
+    plt.scatter(X, Y, color="blue", label="Data")
+    plt.plot(X, Y_pred, color="red", label="Prediction")
+    plt.title("Finale Points Amount")
+    plt.xlabel("Training Hours")
+    plt.ylabel("Game Points")
+    plt.legend()
+    plt.show()
 
     # Прогноз.
 
