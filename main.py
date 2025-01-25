@@ -3,11 +3,13 @@
 Опис проєкту:
 Проєкт допомагає зрозуміти, як тренування впливають на результати гри команди, а також розподілити гравців за їхніми здібностями, щоб оптимізувати тренувальний процес.
 '''
+from random import random
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 
 
 def main():
@@ -28,16 +30,18 @@ def main():
 
     # Поділ даних.
     X = df[["Training Hours"]]
-    Y = df["Game Points"]
+    y = df["Game Points"]
+    X_train,  X_test, y_train,y_test = train_test_split(X, y, train_size=0.8,random_state=42)
+
 
     # Модель.
     model = LinearRegression()
-    model.fit(X, Y)
-    Y_pred = model.predict(X)
+    model.fit(X_train, y_train)
+    Y_pred = model.predict(X_test)
 
     # Візуалізація.
-    plt.scatter(X, Y, color="blue", label="Data")
-    plt.plot(X, Y_pred, color="red", label="Prediction")
+    plt.scatter(X, y, color="blue", label="Data")
+    plt.plot(X_test, Y_pred, color="red", label="Prediction")
     plt.title("Finale Points Amount")
     plt.xlabel("Training Hours")
     plt.ylabel("Game Points")

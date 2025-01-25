@@ -10,8 +10,8 @@ def main():
 
     np.random.seed(42)
 
-    visitors = np.random.randint(1, 8, 30)
-    revenue = 10 * visitors + np.random.randint(0, 30, 30)
+    visitors = np.random.randint(1,30, 100)
+    revenue = 10 * visitors + np.random.randint(0, 1500, 100)
 
     data = {
         'Visitors': visitors,
